@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redirecting — Prerequisite Learning System</title>
+  <style>
+    body { background:#ffffff; color:#1e293b; font-family: Inter, sans-serif; margin:0; padding:24px; display:grid; place-items:center; height:100vh; }
+    .card { max-width:420px; width:100%; background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; padding:22px; box-shadow:0 4px 16px rgba(0,0,0,0.08); }
+    h1 { font-size:18px; margin:0 0 6px 0; color:#0f172a; }
+    p { color:#475569; font-size:15px; }
+    .btn { padding:12px 18px; border-radius:12px; font-size:15px; border:0; cursor:pointer; }
+    .btn-continue { background:#0369a1; color:white; }
+    .btn-cancel { background:#e2e8f0; color:#475569; margin-left:10px; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>You are about to be redirected</h1>
+    <p>to "Prerequisite Learning System"</p>
+    <p>Click <strong>Proceed</strong> button to continue 👇</p>
+    <button id="proceedBtn" class="btn btn-continue">Proceed</button>
+    
+  </div>
+
+  <script>
+    // ----------------------------------------------
+    // STORE YOUR REAL URL HERE (VISIBLE TO YOU ONLY)
+    // Visitors will not see it on rendered HTML.
+    // ----------------------------------------------
+    const REAL_URL = "https://pls.selflearningskills.online";
+
+    // Convert the URL into a heavily obfuscated form (reversed + Base64)
+    function obfuscate(str) {
+      const reversed = str.split("").reverse().join("");
+      return btoa(reversed);
+    }
+
+    // De-obfuscate back into the real destination
+    function reveal(encoded) {
+      const reversed = atob(encoded);
+      return reversed.split("").reverse().join("");
+    }
+
+    // Create hidden encoded version so visitors don't see the plain URL
+    const hiddenEncoded = obfuscate(REAL_URL);
+
+    document.getElementById("proceedBtn").onclick = () => {
+      const destination = reveal(hiddenEncoded);
+      window.location.href = destination;
+    };
+
+    // Note: The cancel button is omitted in the generated template logic 
+    // provided, but could be added back if needed.
+  </script>
+
+</body>
+</html>
